@@ -1,0 +1,77 @@
+#diagrama de flujo general
+
+
+from graphviz import Digraph
+
+g = Digraph()
+g.attr(splines= 'ortho') #arregla las líneas
+g.attr(rankdir='TB')  # de arriba hacia abajo
+
+
+
+# FORMAS CORRECTAS
+# shape='oval' → inicio/fin
+# shape='parallelogram' → entrada/salida
+# shape='diamond' → decisión
+# shape='rectangle' → proceso
+
+# Nodos
+g.node('A', 'Inicio', shape='oval')
+g.node('B', 'Mostrar menú', shape='rectangle')
+g.node('C', '¿Opción seleccionada?', shape='diamond')
+g.node('D', 'Generar contraseña', shape='parallelogram')
+g.node('E', 'Evaluar seguridad', shape='parallelogram')
+g.node('F', 'Guardar contraseña', shape='parallelogram')
+g.node('G', 'Ver contraseñas', shape='parallelogram')
+
+g.node('H', 'Salir', shape='parallelogram')
+g.node('I', 'Fin', shape='oval')
+
+g.node('J', '¿Cuántos carácteres?', shape= 'diamond')
+g.node('K', 'Generar nueva contraseña', shape= 'rectangle')
+g.node('L', '¿Ingrese la contraseña para ser evaluada?', shape='diamond')
+g.node('M', 'Contraseña evaluada', shape= 'rectangle')
+g.node('N','Mostrar Menú', shape= 'rectangle' )
+g.node('O', '¿Ingrese la contraseña?', shape='diamond')
+g.node('P', 'Contraseña guardada', shape= 'rectangle')
+g.node('Q','¿Mostrar contraseñas?', shape= 'diamond')
+g.node('R', 'La lista de contraseñas guardadas se visualizan', shape= 'rectangle')
+g.node('S', '¿Decea salir?', shape= 'diamond')
+g.node('T', 'Salir del programa', shape= 'rectangle')
+
+
+
+# Conexiones
+g.edge('A', 'B')
+g.edge('B', 'C')
+g.edge('C', 'D',)
+g.edge('D', 'J',)
+g.edge('J', 'B', label= 'No')
+g.edge('J', 'K', label= 'si')
+g.edge('E', 'L', label= 'si')
+g.edge('L', 'B', label= 'No')
+g.edge('M', 'I')
+g.edge('O', 'P')
+g.edge('O', 'N', label= 'no')
+g.edge('P', 'I', label= 'si')
+g.edge('R', 'I')
+g.edge('F', 'O')
+g.edge('G', 'Q')
+g.edge('Q', 'R', label='si')
+g.edge('Q', 'N', label= 'no')
+g.edge('H', 'S')
+g.edge('S', 'T', label= 'si')
+
+
+g.edge('L', 'M')
+g.edge('K', 'I',)
+g.edge('C', 'E',)
+g.edge('C', 'F', )
+g.edge('C', 'G', )
+g.edge('C', 'H', )
+
+
+
+# Generar archivo
+g.render('diagrama_flujo_correcto', view=True)
+
